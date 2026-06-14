@@ -1,0 +1,5 @@
+First paragraph of the article. It has a couple of sentences. This is an example.
+
+Second paragraph here: it also has sentences. Testing the analyzer.
+
+Third paragraph — short.
