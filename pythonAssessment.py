@@ -31,6 +31,25 @@ def count_word(text: str, word: str, case_sensitive: bool = False) -> int:
     return sum(1 for w in words if w == word)
 
 
+# Backwards-compatible wrapper for assignment tests
+def count_specific_word(text: str, word: str) -> int:
+    """Count occurrences of `word` in `text` using loops and conditionals.
+
+    This function matches the expected test name `count_specific_word`.
+    """
+    if text is None or word is None:
+        return 0
+    words = tokenize_words(text.lower())
+    target = word.lower()
+    count = 0
+    i = 0
+    while i < len(words):
+        if words[i] == target:
+            count += 1
+        i += 1
+    return count
+
+
 def most_common_word(text: str) -> Tuple[str, int]:
     words = [w.lower() for w in tokenize_words(text)]
     if not words:
@@ -40,12 +59,45 @@ def most_common_word(text: str) -> Tuple[str, int]:
     return word, count
 
 
+def identify_most_common_word(text: str) -> str:
+    """Return the most common word in `text` (lowercased). Returns empty string on empty input.
+
+    Implements counting using a `for` loop and selects the max with a conditional.
+    """
+    words = [w.lower() for w in tokenize_words(text)]
+    if not words:
+        return ""
+    freq = {}
+    for w in words:
+        freq[w] = freq.get(w, 0) + 1
+    max_word = ""
+    max_count = 0
+    for k, v in freq.items():
+        if v > max_count:
+            max_word = k
+            max_count = v
+    return max_word
+
+
 def average_word_length(text: str) -> float:
     words = tokenize_words(text)
     if not words:
         return 0.0
     lengths = [len(w) for w in words]
     return sum(lengths) / len(lengths)
+
+
+def calculate_average_word_length(text: str) -> float:
+    """Calculate and return average word length using a for loop."""
+    words = tokenize_words(text)
+    if not words:
+        return 0.0
+    total = 0
+    count = 0
+    for w in words:
+        total += len(w)
+        count += 1
+    return total / count
 
 
 def count_paragraphs(text: str) -> int:
