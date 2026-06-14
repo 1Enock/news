@@ -101,9 +101,20 @@ def calculate_average_word_length(text: str) -> float:
 
 
 def count_paragraphs(text: str) -> int:
-    # paragraphs separated by one or more blank lines
-    parts = [p for p in re.split(r"\n\s*\n", text) if p.strip()]
-    return len(parts)
+    # Count paragraphs by iterating lines and detecting non-blank blocks.
+    if text is None:
+        return 0
+    lines = text.splitlines()
+    paragraph_count = 0
+    in_paragraph = False
+    for line in lines:
+        if line.strip():
+            if not in_paragraph:
+                paragraph_count += 1
+                in_paragraph = True
+        else:
+            in_paragraph = False
+    return paragraph_count
 
 
 def count_sentences(text: str) -> int:
